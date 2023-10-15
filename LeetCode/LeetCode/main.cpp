@@ -14,9 +14,77 @@ struct sLog
     bool isLetter;
 };
 
+//struct sWord
+
 class Solution
 {
 public:
+    string mostCommonWord(string paragraph, vector<string>& banned) 
+    {
+        map<string, int> wordMap;
+        string wordBuf;
+        size_t i = 0;
+        // 65~90 -> ´ë
+        // 97~122-> ¼Ò
+        for (i = 0; i < paragraph.length(); ++i)
+        {
+            if (65 <= paragraph[i] && paragraph[i] <= 90)
+                wordBuf += (paragraph[i] + 32);
+
+            else if (97 <= paragraph[i] && paragraph[i] <= 122)
+                wordBuf += paragraph[i];
+
+            else if (!(65 <= paragraph[i] && paragraph[i] <= 90) && !(97 <= paragraph[i] && paragraph[i] <= 122))
+            {
+                auto it = wordMap.find(wordBuf);
+                if (wordMap.end() == it)
+                    wordMap.insert(make_pair(wordBuf, 1));
+                else
+                    ++(it->second);
+                wordBuf.clear();
+            }
+        }
+        if (wordBuf.length())
+        {
+            auto it = wordMap.find(wordBuf);
+            if (wordMap.end() == it)
+                wordMap.insert(make_pair(wordBuf, 1));
+            else
+                ++(it->second);
+            wordBuf.clear();
+        }
+        i = 0;
+        for (auto& it : wordMap)
+        {
+            bool flag = false;
+            if (it.second > i)
+            {
+                if (banned.size() != 0)
+                {
+                    for (auto& t : banned)
+                    {
+                        if (it.first == t)
+                        {
+                            flag = true;
+                        }
+                    }
+                    if (!flag&&it.first != "")
+                    {
+                        wordBuf = it.first;
+                        i = it.second;
+                    }
+                }
+                else
+                {
+                   wordBuf = it.first;
+                    i = it.second;
+                }
+            }
+        }
+        
+        return wordBuf;
+
+    }
     vector<string> reorderLogFiles(vector<string>& logs)
     {
         map<string, sLog>   LetterLog;
@@ -63,3 +131,17 @@ public:
         return logs;
     }
 };
+
+int main()
+{
+    Solution sol;
+
+    string s = "Bob. hIt, baLl";//"Bob";//"Bob hit a ball, the hit BALL flew far after it was hit.";
+    vector<string> v;
+    v.push_back("hit");
+    v.push_back("bob");
+
+    sol.mostCommonWord(s, v);
+
+    return 0;
+}
