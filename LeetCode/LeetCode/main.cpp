@@ -3,6 +3,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <list>
 
 using namespace std;
 
@@ -14,11 +15,81 @@ struct sLog
     bool isLetter;
 };
 
-//struct sWord
 
 class Solution
 {
 public:
+
+    vector<vector<string>> groupAnagrams(vector<string>& strs) 
+    {
+        bool flag = false;
+        vector<vector<string>> vReturn;
+        for (size_t j = 0; j < strs.size(); ++j)
+        {
+            string sSource = strs[j];
+            string sBuf = "";
+            string vBuf = "";
+            set<char> setSort;
+           
+            
+            // 1. 문자열을 정렬해서 
+            if (sSource != "")
+            {
+                for (size_t i = 0; i < sSource.size(); ++i)
+                    setSort.insert(sSource[i]);
+            
+                for (auto& it : setSort)
+                {
+                    sBuf += it;
+                }
+                setSort.clear();
+            }
+
+            
+            flag = false;
+            
+            // 정렬한 문자열이 이미 있는 문자열인가?를 확인
+            for (auto& it : vReturn)
+            {
+                setSort.clear();
+
+                if (sSource != "")
+                {
+                    for (size_t i = 0; i < it[0].size(); ++i)
+                        setSort.insert(it[0][i]);
+
+                    for (auto& it : setSort)
+                    {
+                        vBuf += it;
+                    }
+
+                    setSort.clear();
+                }
+               
+                // 2. 만약 있는 문자열이라면 
+                if (vBuf == sBuf)
+                {
+                    // 해당 벡터에 넣기
+                    it.push_back(sSource);
+                    flag = true;
+                    break;
+                }
+            }
+            // 3. 만약 없는 문자열이라면 
+            if (!flag)
+            {
+                // 새로운 set를 만들어 
+                vector<string> vNewstr;
+                vNewstr.push_back(sSource);
+                // 그 set에 넣기
+                vReturn.push_back(vNewstr);
+            }
+
+        }
+        
+        return vReturn;
+    }
+
     string mostCommonWord(string paragraph, vector<string>& banned) 
     {
         map<string, int> wordMap;
@@ -136,12 +207,18 @@ int main()
 {
     Solution sol;
 
-    string s = "Bob. hIt, baLl";//"Bob";//"Bob hit a ball, the hit BALL flew far after it was hit.";
+    //string s = "Bob. hIt, baLl";//"Bob";//"Bob hit a ball, the hit BALL flew far after it was hit.";
     vector<string> v;
-    v.push_back("hit");
-    v.push_back("bob");
+    //"eat", "tea", "tan", "ate", "nat", "bat"
+    v.push_back("eat");
+    v.push_back("tea");
+    v.push_back("tan");
+    v.push_back("ate");
+    v.push_back("nat");
+    v.push_back("bat");
 
-    sol.mostCommonWord(s, v);
+    //sol.mostCommonWord(s, v);
+    sol.groupAnagrams(v);
 
     return 0;
 }
