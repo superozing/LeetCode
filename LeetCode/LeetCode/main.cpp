@@ -1,11 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <set>
-#include <map>
-#include <list>
-
-using namespace std;
+#include "Çì´õ.h"
 
 struct sLog
 {
@@ -203,22 +196,22 @@ public:
     }
 };
 
-int main()
-{
-    Solution sol;
-
-    //string s = "Bob. hIt, baLl";//"Bob";//"Bob hit a ball, the hit BALL flew far after it was hit.";
-    vector<string> v;
-    //"eat", "tea", "tan", "ate", "nat", "bat"
-    v.push_back("eat");
-    v.push_back("tea");
-    v.push_back("tan");
-    v.push_back("ate");
-    v.push_back("nat");
-    v.push_back("bat");
-
-    //sol.mostCommonWord(s, v);
-    sol.groupAnagrams(v);
-
-    return 0;
-}
+//int main()
+//{
+//    Solution sol;
+//
+//    //string s = "Bob. hIt, baLl";//"Bob";//"Bob hit a ball, the hit BALL flew far after it was hit.";
+//    vector<string> v;
+//    //"eat", "tea", "tan", "ate", "nat", "bat"
+//    v.push_back("eat");
+//    v.push_back("tea");
+//    v.push_back("tan");
+//    v.push_back("ate");
+//    v.push_back("nat");
+//    v.push_back("bat");
+//
+//    //sol.mostCommonWord(s, v);
+//    sol.groupAnagrams(v);
+//
+//    return 0;
+//}
