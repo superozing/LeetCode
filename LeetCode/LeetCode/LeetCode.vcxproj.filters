@@ -21,6 +21,9 @@
     <ClCompile Include="1. Two Sum.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="15. 3Sum.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
