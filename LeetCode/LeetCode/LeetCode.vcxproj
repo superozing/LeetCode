@@ -138,6 +138,7 @@
     <ClCompile Include="238. Product of Array Except Self.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="24. Swap Nodes in Pairs.cpp" />
     <ClCompile Include="328. Odd Even Linked List.cpp" />
     <ClCompile Include="561. Array Partition.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

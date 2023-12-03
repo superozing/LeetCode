@@ -36,6 +36,9 @@
     <ClCompile Include="328. Odd Even Linked List.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="24. Swap Nodes in Pairs.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
