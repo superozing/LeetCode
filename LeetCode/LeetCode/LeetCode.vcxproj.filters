@@ -30,6 +30,9 @@
     <ClCompile Include="238. Product of Array Except Self.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="92. Reverse Linked List II.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
