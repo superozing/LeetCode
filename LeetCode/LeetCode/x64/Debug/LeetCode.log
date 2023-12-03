@@ -1,2 +1,5 @@
-﻿  1. Two Sum.cpp
-  LeetCode.vcxproj -> C:\02. LeetCode\LeetCode\LeetCode\x64\Debug\LeetCode.exe
+﻿  328. Odd Even Linked List.cpp
+  92. Reverse Linked List II.cpp
+  코드를 생성하고 있습니다...
+C:\02. LeetCode\LeetCode\LeetCode\LeetCode\92. Reverse Linked List II.cpp(52,13): error C2059: 구문 오류: '}'
+C:\02. LeetCode\LeetCode\LeetCode\LeetCode\92. Reverse Linked List II.cpp(58,13): error C2059: 구문 오류: '}'
