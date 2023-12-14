@@ -118,6 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +139,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="2. Add Two Numbers.cpp" />
+    <ClCompile Include="20. Valid Parentheses.cpp" />
     <ClCompile Include="206. Reverse Linked List.cpp" />
     <ClCompile Include="207. Course Schedule.cpp" />
     <ClCompile Include="21. Merge Two Sorted Lists.cpp" />
