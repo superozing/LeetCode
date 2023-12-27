@@ -60,6 +60,9 @@
     <ClCompile Include="20. Valid Parentheses.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="56. Merge Intervals.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
