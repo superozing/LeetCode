@@ -18,15 +18,22 @@ class Solution
 public:
     ListNode* sortList(ListNode* head) 
     {
+        if (head == nullptr || head->next == nullptr)
+        {
+            return head;
+        }
+
         map<int, ListNode*> sortmap;
         
-        ListNode* lIter = head;
+        ListNode* NodeBuff = head;
 
         // 데이터 넣으며 정렬
-        while (lIter != nullptr)
+        while (true)
         {
-            sortmap.insert({ lIter->val, lIter });
-            lIter = lIter->next;
+            sortmap.insert({ NodeBuff->val, NodeBuff });
+            NodeBuff = NodeBuff->next;
+            if (NodeBuff == nullptr)
+                break;
         }
 
 
@@ -36,16 +43,16 @@ public:
         // 4. 다음 노드를 이전 노드로 저장하고 있기
         // 5. 다음 노드를 가리키기... 2, 3, 4 반복하면 될 듯
 
-        lIter = sortmap.begin()->second;
-        head = sortmap.begin()->second;
-
-        for (auto& iter : sortmap)
+        head = NodeBuff = sortmap.begin()->second;
+        auto iter = sortmap.begin();
+        ++iter;
+        for (; iter != sortmap.end(); ++iter)
         {
-            lIter->next = iter.second;
-            iter.second = lIter;
+            NodeBuff->next = iter->second;
+            NodeBuff = iter->second;
         }
 
-        lIter->next = nullptr;
+        NodeBuff->next = nullptr;
 
         return head;
     }
