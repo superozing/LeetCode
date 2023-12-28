@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Problem List</Filter>
-    </ClCompile>
     <ClCompile Include="1. Two Sum.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
@@ -61,6 +58,15 @@
       <Filter>Problem List</Filter>
     </ClCompile>
     <ClCompile Include="56. Merge Intervals.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="147. Insertion Sort List.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="179. Largest Number.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="242. Valid Anagram.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
   </ItemGroup>

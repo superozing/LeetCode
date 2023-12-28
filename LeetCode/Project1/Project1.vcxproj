@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{284de46f-63a6-4c49-b70b-8ef3433f7776}</ProjectGuid>
-    <RootNamespace>LeetCode</RootNamespace>
+    <ProjectGuid>{8a46ba3a-31b9-4882-b08e-478dc9342817}</ProjectGuid>
+    <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,7 +118,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,36 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="1. Two Sum.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="121. Best Time to Buy and Sell Stock.cpp" />
-    <ClCompile Include="147. Insertion Sort List.cpp" />
-    <ClCompile Include="15. 3Sum.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="179. Largest Number.cpp" />
-    <ClCompile Include="2. Add Two Numbers.cpp" />
-    <ClCompile Include="20. Valid Parentheses.cpp" />
-    <ClCompile Include="206. Reverse Linked List.cpp" />
-    <ClCompile Include="207. Course Schedule.cpp" />
-    <ClCompile Include="21. Merge Two Sorted Lists.cpp" />
-    <ClCompile Include="234. Palindrome Linked List.cpp" />
-    <ClCompile Include="238. Product of Array Except Self.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="24. Swap Nodes in Pairs.cpp" />
-    <ClCompile Include="242. Valid Anagram.cpp" />
-    <ClCompile Include="328. Odd Even Linked List.cpp" />
-    <ClCompile Include="56. Merge Intervals.cpp" />
-    <ClCompile Include="561. Array Partition.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="92. Reverse Linked List II.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h" />
