@@ -81,6 +81,15 @@
     <ClCompile Include="33. Search in Rotated Sorted Array.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="461. Hamming Distance.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="191. Number of 1 Bits.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="393. UTF-8 Validation.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
