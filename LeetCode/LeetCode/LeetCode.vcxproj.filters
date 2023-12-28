@@ -69,6 +69,12 @@
     <ClCompile Include="242. Valid Anagram.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="75. Sort Colors.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="973. K Closest Points to Origin.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
