@@ -23,7 +23,6 @@ public:
 
         while (left <= right)
         {
-            printf("%d, %d, %d\n", left, right, CurIdx);
             if (nums[CurIdx] < target)
             {
                 left = CurIdx + 1;
@@ -37,21 +36,9 @@ public:
                 return CurIdx;
             }
             CurIdx = left + (right - left) / 2;
-
         }
 
         return -1;
 
     }
 };
-
-
-
-int main()
-{
-    Solution s;
-    vector<int> v{ -1,0,3,5,9,12 };
-    int a = s.search(v, 9);
-    printf("%d\n", a);
-    return 0;
-}

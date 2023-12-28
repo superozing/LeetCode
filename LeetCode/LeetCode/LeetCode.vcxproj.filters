@@ -75,6 +75,9 @@
     <ClCompile Include="973. K Closest Points to Origin.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="704. Binary Search.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
