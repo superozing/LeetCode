@@ -1,6 +1,4 @@
 #include "Çì´õ.h"
-
-
 class Solution
 {
 public:
@@ -89,18 +87,3 @@ public:
         return -1;
     }
 };
-
-
-
-
-
-
-
-int main()
-{
-    Solution s;
-    vector<int> v{ 5,1,2,3,4 };
-    int a = s.search(v, 1);
-    printf("%d\n", a);
-    return 0;
-}

@@ -78,6 +78,9 @@
     <ClCompile Include="704. Binary Search.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="33. Search in Rotated Sorted Array.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
