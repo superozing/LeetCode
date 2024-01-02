@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -150,6 +150,7 @@
     <ClCompile Include="238. Product of Array Except Self.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="239. Sliding Window Maximum.cpp" />
     <ClCompile Include="24. Swap Nodes in Pairs.cpp" />
     <ClCompile Include="242. Valid Anagram.cpp" />
     <ClCompile Include="328. Odd Even Linked List.cpp" />
