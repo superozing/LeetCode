@@ -1,75 +1,69 @@
 #include "헤더.h"
 
 
-
+#define 체크하기 ㅇ(MinIdx, MaxIdx, s, tCheck)
+#define 체크하기1 ㅇ(MinIdx + 1, MaxIdx, s, tCheck)
 class Solution
 {
 public:
     string minWindow(string s, string t)
     {
-        // 예외
-        if (s.length() < t.length()) return "";
+        // 일단 배열을 적게 만들기 위해서 - 'A'를 상시 해주어야 해.
+        vector<bool> tCheck(26);
+        for (auto& it : t)
+            tCheck[it - 'A'] = true;
 
-        vector<int> tIdxVec;
+        int MinIdx_r = 0;
+        int MaxIdx_r = t.length() - 1;
 
-        bool stringCheck['Z' - 'A']{};
+        int MinIdx = 0;
+        int MaxIdx = t.length() - 1;
 
-        int LIdx = 0;
-        int RIdx = 0;
-
-        // t 체크
-        for (int i = 0; i < t.length(); ++i)
-            tIdxVec.push_back(t[i] - 'A');
-
-
-        // s 체크
-        deque<int> dq;
-
-        string ret{};
-
-        // 1. s에 t의 모든 문자가 들어갈 때 까지 오른 쪽 인덱스를 계속해서 확장
-        // 일단 부분문자열의 최소 길이는 t.
-        while (RIdx != s.length())
+        // MaxIdx를 늘려가면서 s가 포함되는지 체크
+        while (true)
         {
-            while (!isIncludeString(tIdxVec, stringCheck))
-            {
-                dq.push_back(s[++RIdx]);
-                stringCheck[s[RIdx] - 'A'] = true;
-            }
-            while (isIncludeString(tIdxVec, stringCheck))
-            {
-                stringCheck[s[dq.front()] - 'A'] = false;
-                dq.pop_front(); 
-                ++LIdx;
-            }
-
-            // 
-            if (ret.length() > RIdx - LIdx)
-            {
-                ret = {};
-                for (int i = LIdx - 1; i < RIdx; ++i)
-                {
-                    ret += s[i];
-                }
-            }
+            if (체크하기)
+                break;
+            else
+                ++MaxIdx;
         }
 
-        return ret;
+
+        // MinIdx를 늘려가면서 s가 포함되는지 체크
+        while (true)
+        {
+            if (체크하기1)
+                ++MinIdx;
+            else
+                break;
+        }
+
+        MinIdx_r = MinIdx;
+        MaxIdx_r = MaxIdx;
+
+        string r;
+        for (int i = MinIdx_r; i < MaxIdx_r; ++i)
+        {
+            r += s[i];
+        }
+        return r;
+
     }
 
-    bool isIncludeString(vector<int>& checked, bool* stringCheck)
+    bool ㅇ(int min, int max, const string& s, const vector<bool>& boolArr)
     {
-        for (int i = 0; i < checked.size(); ++i)
+        for (int i = min; i < max; ++i)
         {
-            if (!stringCheck[checked[i]])
+            if (boolArr[i - min] s[i] - 'A' == false)
                 return false;
         }
 
         return true;
     }
 
-};
 
+
+};
 
 int main()
 {
