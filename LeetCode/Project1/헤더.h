@@ -5,6 +5,7 @@
 #include <set>
 #include <map>
 #include <list>
+#include <deque>
 #include <algorithm>
 #include <cmath>
 

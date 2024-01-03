@@ -90,6 +90,12 @@
     <ClCompile Include="393. UTF-8 Validation.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="239. Sliding Window Maximum.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="76. Minimum Window Substring.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
