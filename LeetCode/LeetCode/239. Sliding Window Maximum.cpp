@@ -1,5 +1,74 @@
 #include "헤더.h"
 
+class Solution
+{
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k)
+    {
+        vector<int> returnVector;
+        deque<int> dq; // 최대 값 인덱스 관리
+
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            // 1. 윈도우 범위를 벗어난 모든 넘어간 인덱스를 제거
+            while (!dq.empty() && dq.front() < i - k + 1)
+                dq.pop_front();
+
+            // 2. 새로 들어올 값이 더 클 경우 뒤 쪽을 날려서 
+            while (!dq.empty() && nums[dq.back()] < nums[i])
+                dq.pop_back();
+
+            dq.push_back(i);
+
+            if (i >= k - 1)
+                returnVector.push_back(nums[dq.front()]);
+        }
+
+        return returnVector;
+    }
+};
+
+class Solution
+{
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k)
+    {
+        vector<int> returnVector;
+        int MaxValueIdx = -1;
+        int PopTime = 0;
+
+        while (nums.size() - k + 1 != PopTime)
+        {
+            // 1. 만약 MaxValue인덱스가 pop 되었는가?
+            if (MaxValueIdx - PopTime == -1)
+            {
+                // 초기화 후 새로운 최대 값 찾기
+                int MaxValue = -10000;
+
+                // 1. 첫 K개 중 가장 많은 데이터 가져오기
+                for (int i = PopTime; i < k + PopTime; ++i)
+                {
+                    if (MaxValue < nums[i])
+                    {
+                        MaxValue = nums[i];
+                        MaxValueIdx = i;
+                    }
+                }
+            }
+            // 2. 만약 k번째 데이터가 MaxValue보다 같거나 큰가?
+            else if (nums[MaxValueIdx] <= nums[k - 1 + PopTime])
+            {
+                MaxValueIdx = k - 1 + PopTime;
+            }
+            // 3. 만약 새로 들어온 데이터가 MaxValue보다 작아서 여전히 MaxValue가 가장 클 때 - 아무 동작 안해도 됨.
+
+            returnVector.push_back(nums[MaxValueIdx]);
+            ++PopTime;
+        }
+
+        return returnVector;
+    }
+};
 
 class Solution
 {
@@ -23,32 +92,42 @@ public:
 
 
 
-        // 그러면 일단 deque를 초기화 해보아요.
-        int MaxValueIdx = 0;
+        int MaxValueIdx = -1;
         int MaxValue = -10000;
-        vector<int> returnVector; // 매 반복마다 가장 큰 값을 넣어서 반환할 벡터.
+
+        vector<int> returnVector;
         deque<int> 덱(nums.begin(), nums.end());
 
-        // 그러면 덱에는 지금 모든 nums의 요소가 들어있겠죠?
-        // 모든 덱을 훑을 필요가 없다.
-
-        // 덱의 size()보다 k(윈도우 크기) 커진다면 더이상 비교할 데이터가 없다는 뜻이겠죠?
-        while (k < 덱.size())
+        while (k <= 덱.size())
         {
-
-            // 5-3)의 경우. 데이터를 훑으며 새로운 데이터를 찾아야 할 때. 일단 처음의 경우에는 반드시 진행해야 함.
-            for (int i = 0; i < k; ++i)
+            // 1. 만약 MaxValue인덱스가 pop 되었는가?
+            if (MaxValueIdx == -1)
             {
-                // 여기서 해야 할 것은 최대 값과 최대 값의 인덱스를 찾는 것.
+                // 초기화 후 새로운 최대 값 찾기
+                MaxValue = -10000;
+
+                // 1. 첫 K개 중 가장 많은 데이터 가져오기
+                for (int i = 0; i < k; ++i)
+                {
+                    if (MaxValue < 덱[i])
+                    {
+                        MaxValue = 덱[i];
+                        MaxValueIdx = i;
+                    }
+                }
             }
+            // 2. 만약 k번째 데이터가 MaxValue보다 같거나 큰가?
+            else if (MaxValue <= 덱[k - 1])
+            {
+                MaxValue = 덱[k - 1];
+                MaxValueIdx = k - 1;
+            }
+            // 3. 만약 새로 들어온 데이터가 MaxValue보다 작아서 여전히 MaxValue가 가장 클 때 - 아무 동작 안해도 됨.
 
-
-
+            returnVector.push_back(MaxValue);
+            덱.pop_front();
+            --MaxValueIdx;
         }
-
-        
-
-
 
         return returnVector;
     }
@@ -56,53 +135,53 @@ public:
 };
 
 
-//class Solution
-//{
-//    int MaxValue = 0;
-//
-//public:
-//    vector<int> maxSlidingWindow(vector<int>& nums, int k)
-//    {
-//        // 그니까 문자열을 받아서 슬라이딩 윈도우를 직접 구현해서 가장 큰 수를 찾으라는 것이죠?
-//        // 리스트를 사용해서 인자를 받고 내보내고를 반복하면 될 듯.
-//        // for문을 사용해서 문자열 전부를 한번 읽어보자.
-//        // 일단 초기 값을 채우고, nums.length - k + 1 번 만큼 반복해서, 이 중 가장 큰 수를 찾아야 한다.
-//
-//        list<int> 덱;
-//        int idx = 0;
-//        MaxValue = -10000;
-//        vector<int> returnVector;
-//
-//        // 초기 값 채우기
-//        for (; idx < k; ++idx)
-//            덱.push_back(nums[idx]);
-//
-//        sum(덱, returnVector);
-//
-//        for (; idx < nums.size(); ++idx)
-//        {
-//            // 1. pop front로 앞쪽을 빼내고
-//            // 2. push_back로 새로운 데이터를 넣고
-//            // 3. sum 호출하기.
-//            덱.pop_front();
-//            덱.push_back(nums[idx]);
-//            sum(덱, returnVector);
-//        }
-//
-//        return returnVector;
-//    }
-//
-//
-//
-//    void sum(list<int>& sum, vector<int>& returnVec)
-//    {
-//        int WindowSum = -10000;
-//        for (auto& iter : sum)
-//        {
-//            if (WindowSum < iter)
-//                WindowSum = iter;
-//        }
-//        returnVec.push_back(WindowSum);
-//        return;
-//    }
-//};
+class Solution
+{
+    int MaxValue = 0;
+
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k)
+    {
+        // 그니까 문자열을 받아서 슬라이딩 윈도우를 직접 구현해서 가장 큰 수를 찾으라는 것이죠?
+        // 리스트를 사용해서 인자를 받고 내보내고를 반복하면 될 듯.
+        // for문을 사용해서 문자열 전부를 한번 읽어보자.
+        // 일단 초기 값을 채우고, nums.length - k + 1 번 만큼 반복해서, 이 중 가장 큰 수를 찾아야 한다.
+
+        list<int> 덱;
+        int idx = 0;
+        MaxValue = -10000;
+        vector<int> returnVector;
+
+        // 초기 값 채우기
+        for (; idx < k; ++idx)
+            덱.push_back(nums[idx]);
+
+        sum(덱, returnVector);
+
+        for (; idx < nums.size(); ++idx)
+        {
+            // 1. pop front로 앞쪽을 빼내고
+            // 2. push_back로 새로운 데이터를 넣고
+            // 3. sum 호출하기.
+            덱.pop_front();
+            덱.push_back(nums[idx]);
+            sum(덱, returnVector);
+        }
+
+        return returnVector;
+    }
+
+
+
+    void sum(list<int>& sum, vector<int>& returnVec)
+    {
+        int WindowSum = -10000;
+        for (auto& iter : sum)
+        {
+            if (WindowSum < iter)
+                WindowSum = iter;
+        }
+        returnVec.push_back(WindowSum);
+        return;
+    }
+};
