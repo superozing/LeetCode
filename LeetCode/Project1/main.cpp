@@ -9,14 +9,9 @@ public:
     {
         // 이전 값보다 작은 값이 나오기 이전까지 계속 체크하기만 하면 될 듯?
         int returnValue = 0;
-        int CurCheckIdx = 0;
         for (int i = 1; i < prices.size(); ++i)
-        {
             if (prices[i - 1] < prices[i])
                 returnValue += prices[i] - prices[i - 1];
-
-        }
-
         return returnValue;
 
     }

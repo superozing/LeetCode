@@ -102,6 +102,12 @@
     <ClCompile Include="122. Best Time to Buy and Sell Stock II.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="406. Queue Reconstruction by Height.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="621. Task Scheduler.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">

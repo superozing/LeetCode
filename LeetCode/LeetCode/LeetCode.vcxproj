@@ -157,6 +157,7 @@
     <ClCompile Include="328. Odd Even Linked List.cpp" />
     <ClCompile Include="33. Search in Rotated Sorted Array.cpp" />
     <ClCompile Include="393. UTF-8 Validation.cpp" />
+    <ClCompile Include="406. Queue Reconstruction by Height.cpp" />
     <ClCompile Include="424. Longest Repeating Character Replacement.cpp" />
     <ClCompile Include="461. Hamming Distance.cpp" />
     <ClCompile Include="56. Merge Intervals.cpp" />
@@ -164,6 +165,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="621. Task Scheduler.cpp" />
     <ClCompile Include="704. Binary Search.cpp" />
     <ClCompile Include="75. Sort Colors.cpp" />
     <ClCompile Include="76. Minimum Window Substring.cpp" />
