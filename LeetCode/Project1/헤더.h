@@ -8,7 +8,9 @@
 #include <deque>
 #include <algorithm>
 #include <cmath>
+#include <queue>
 #include <numeric>
+
 using namespace std;
 
 struct ListNode {

@@ -1,19 +1,16 @@
 #include "«Ï¥ı.h"
 
-
-
-
-class Solution
+class Solution 
 {
 public:
-    int findContentChildren(vector<int>& g, vector<int>& s)
+    int findContentChildren(vector<int>& g, vector<int>& s) 
     {
         // øÂΩ…¿Ô¿Ã πÆ¡¶µÈ
         sort(g.begin(), g.end());
         sort(s.begin(), s.end());
         int gIdx = 0;
         int sIdx = 0;
-        while (sIdx < s.size() && gIdx < g.size())
+        while (sIdx < s.size() || gIdx < g.size())
         {
             if (g[gIdx] >= s[sIdx])
                 ++gIdx;
@@ -24,13 +21,3 @@ public:
         return gIdx;
     }
 };
-
-
-int main()
-{
-    Solution s;
-    vector<int> a1({ 1,2,3 });
-    vector<int> a2({ 1,1 });
-    printf("%d\n", s.findContentChildren(a1, a2));
-    return 0;
-}

@@ -160,6 +160,7 @@
     <ClCompile Include="393. UTF-8 Validation.cpp" />
     <ClCompile Include="406. Queue Reconstruction by Height.cpp" />
     <ClCompile Include="424. Longest Repeating Character Replacement.cpp" />
+    <ClCompile Include="455. Assign Cookies.cpp" />
     <ClCompile Include="461. Hamming Distance.cpp" />
     <ClCompile Include="56. Merge Intervals.cpp" />
     <ClCompile Include="561. Array Partition.cpp">
