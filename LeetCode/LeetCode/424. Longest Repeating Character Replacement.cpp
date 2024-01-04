@@ -16,7 +16,6 @@ public:
         // 빈도 체크
         vector<int> FrequencyCount('Z' + 1); // 앞 쪽 공간이 아깝기는 하네요...?
         
-        // 슬라이딩 윈도우
         int LIdx = 0;
         int RIdx = 0;
 
