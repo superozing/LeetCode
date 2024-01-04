@@ -2,15 +2,14 @@
 
 #define 체크하기 ㅇ(MinIdx, MaxIdx, s, tCheck)
 #define 체크하기1 ㅇ(MinIdx + 1, MaxIdx, s, tCheck)
-
 class Solution
 {
 public:
     string minWindow(string s, string t)
     {
         // 일단 배열을 적게 만들기 위해서 - 'A'를 상시 해주어야 해.
-        bool tCheck[26]{};
-        for (auto &it : t)
+        vector<bool> tCheck(26);
+        for (auto& it : t)
             tCheck[it - 'A'] = true;
 
         int MinIdx_r = 0;
@@ -50,20 +49,21 @@ public:
 
     }
 
-    bool ㅇ(int min, int max, const string& s, const bool* boolArr)
+    bool ㅇ(int min, int max, const string& s, const vector<bool>& boolArr)
     {
-        for (; min <= max; ++min)
+        for (int i = min; i < max; ++i)
         {
-            if (boolArr[s[min] - 'A'] == false)
+            if (boolArr[i - min] s[i] - 'A' == false)
                 return false;
         }
 
         return true;
     }
 
-    
+
 
 };
+
 
 
 

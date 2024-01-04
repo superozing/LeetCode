@@ -156,6 +156,7 @@
     <ClCompile Include="328. Odd Even Linked List.cpp" />
     <ClCompile Include="33. Search in Rotated Sorted Array.cpp" />
     <ClCompile Include="393. UTF-8 Validation.cpp" />
+    <ClCompile Include="424. Longest Repeating Character Replacement.cpp" />
     <ClCompile Include="461. Hamming Distance.cpp" />
     <ClCompile Include="56. Merge Intervals.cpp" />
     <ClCompile Include="561. Array Partition.cpp">
