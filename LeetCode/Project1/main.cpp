@@ -3,34 +3,82 @@
 
 
 
-class Solution
+struct p
 {
+    int score;
+    int opt;
 public:
-    int findContentChildren(vector<int>& g, vector<int>& s)
+    p() {}
+    p(int a, int b) : score(a), opt(b) {}
+};
+
+int solution(string str)
+{
+    p resVec[3]{ {0, 1}, {0, 1}, {0, 1} };
+
+    int strIdx = 0;
+
+    for (int i = 0; i < 3; ++i)
     {
-        // 욕심쟁이 문제들
-        sort(g.begin(), g.end());
-        sort(s.begin(), s.end());
-        int gIdx = 0;
-        int sIdx = 0;
-        while (sIdx < s.size() && gIdx < g.size())
+        // 점수
+        string scoreBuf = "";
+        for (;; ++strIdx)
         {
-            if (g[gIdx] >= s[sIdx])
-                ++gIdx;
-            ++sIdx;
+            if ('0' <= str[strIdx] && str[strIdx] <= '9')
+            {
+                scoreBuf += str[strIdx];
+            }
+            else
+            {
+                break;
+            }
         }
 
-        // 만족하신 숫자를 바로 return.
-        return gIdx;
+        resVec[i].score = stoi(scoreBuf);
+
+        // 보너스
+        switch (str[strIdx])
+        {
+        case 'T':
+            resVec[i].score = pow(resVec[i].score, 3);
+            break;
+
+        case 'D':
+            resVec[i].score = pow(resVec[i].score, 2);
+        }
+
+        ++strIdx;
+
+        // 옵션
+        switch (str[strIdx])
+        {
+        case '*':
+            resVec[i].opt *= 2;
+
+            if (i > 0)
+                resVec[i - 1].opt *= 2;
+            ++strIdx;
+            break;
+
+        case '#':
+            resVec[i].opt *= -1;
+            ++strIdx;
+            break;
+        }
     }
-};
+
+    int ret = 0;
+
+    for (int i = 0; i < 3; ++i)
+        ret += resVec[i].score * resVec[i].opt;
+
+    return ret;
+}
 
 
 int main()
 {
-    Solution s;
-    vector<int> a1({ 1,2,3 });
-    vector<int> a2({ 1,1 });
-    printf("%d\n", s.findContentChildren(a1, a2));
+
+    printf("%d\n", solution("1S2D*3T"));
     return 0;
 }
