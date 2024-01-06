@@ -117,6 +117,9 @@
     <ClCompile Include="kakao 2018 1. 비밀지도.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="kakao 2018 2. 다트 게임.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
