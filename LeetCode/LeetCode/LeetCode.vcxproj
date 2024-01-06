@@ -173,6 +173,7 @@
     <ClCompile Include="76. Minimum Window Substring.cpp" />
     <ClCompile Include="92. Reverse Linked List II.cpp" />
     <ClCompile Include="973. K Closest Points to Origin.cpp" />
+    <ClCompile Include="kakao 2018 1. 비밀지도.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h" />
