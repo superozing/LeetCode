@@ -52,10 +52,3 @@ int solution(int cacheSize, vector<string> cities)
 
     return secCount;
 }
-
-int main()
-{
-
-    printf("%d\n", solution(3, vector<string>({ "Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA" })));
-    return 0;
-}
