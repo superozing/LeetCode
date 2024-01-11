@@ -3,7 +3,7 @@
 int isOverlap(string& _str, list<string>& city, int cacheSize)
 {
     for (auto& ch : _str)
-        if (ch < 'a') ch += ('a' - 'A');
+        if ('A' <= ch && ch <= 'Z') ch += ('a' - 'A');
 
     bool isFind = false;
 

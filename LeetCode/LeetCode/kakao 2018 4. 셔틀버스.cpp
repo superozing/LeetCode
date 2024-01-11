@@ -1,6 +1,10 @@
 #include "헤더.h"
 
-
+int ttoi(string _str)
+{
+    _str.erase(_str.begin() + 2);
+    return stoi(_str);
+}
 
 string solution(int n, int t, int m, vector<string> timetable) 
 {
@@ -21,6 +25,18 @@ string solution(int n, int t, int m, vector<string> timetable)
 
     // 만약 중간에 리스트에 데이터를 채우는 과정에서 버스 배차 막차보다 늦은 경우가 있다면 더이상 타임테이블을 체크할 필요가 없어지게 된다.
 
+
+    /*멀티셋 을 사용한다면 중복된 데이터 개수를 Count를 사용해서 확인이 가능하다고 한다.
+      멀티셋을 사용해보는게 어떨까?*/
+
+
+    // 모든 타임테이블을 정수로 변환해서 데이터에 저장. 
+    // 만약 같은 데이터가 있을 경우, 해당 데이터의 count 1 증가. 
+    // 만약 마지막 열차 도착 시간보다 늦은 시간일 경우 무시. 하지만 이것 먼저 해보자.
+    for (int i = 0; i < timetable.size(); ++i)
+    {
+        ttoi(timetable[i]);
+    }
 
 
 
