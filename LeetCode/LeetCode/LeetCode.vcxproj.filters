@@ -126,6 +126,12 @@
     <ClCompile Include="kakao 2018 4. 셔틀버스.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="kakao 2018 5. 뉴스 클러스터링.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
+    <ClCompile Include="kakao 2018 5. 프렌즈 4 블록.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">

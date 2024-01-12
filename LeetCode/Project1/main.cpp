@@ -1,61 +1,111 @@
 #include "헤더.h"
 
-int isOverlap(string& _str, list<string>& city, int cacheSize)
+int gm = 0;
+int gn = 0;
+
+int 블록터뜨리기(vector<string>& board, vector<vector<int>>& check)
 {
-    for (auto& ch : _str)
-        if (ch < 'a') ch += ('a' - 'A');
+    int ret = 0;
 
-    bool isFind = false;
+    // 체크를 위해 이차원 배열 만들기.
+    // [0][0], [0][1], [1][0], [1][1]이 같으면 해당 공간은 터져야 해.
 
-    for (list<string>::iterator iter = city.begin(); iter != city.end();)
+    for (int i = 0; i < gm - 1; ++i)
     {
-        if (*iter == _str)
+        for (int j = 0; j < gn - 1; ++j)
         {
-            isFind = true;
-            city.erase(iter);
-            city.push_back(_str);
-            break;
+            if (board[i][j] != '0' 
+                && board[i][j] == board[i][j + 1] 
+                && board[i][j + 1] == board[i + 1][j] 
+                && board[i + 1][j] == board[i + 1][j + 1])
+            {
+                check[i][j] = true;
+                check[i + 1][j] = true;
+                check[i][j + 1] = true;
+                check[i + 1][j + 1] = true;
+            }
         }
-        ++iter;
     }
 
-    if (!isFind)
+    // 터진 블록 체크
+    for (int i = 0; i < gm; ++i)
     {
-        city.push_back(_str);
-
-        if (city.size() >= cacheSize)
-            city.pop_front();
-
-        return 5;
+        for (int j = 0; j < gn; ++j)
+        {
+            if (check[i][j])
+            {
+                board[i][j] = '0';
+                check[i][j] = false;
+                ++ret;
+            }
+        }
     }
 
-
-    return 1;
+    return ret; // 터뜨린 블록 개수를 반환하면 될 듯?
 }
 
-int solution(int cacheSize, vector<string> cities)
+void 블록재정렬(vector<string>& board)
 {
-    // 조건)
-    // 1. 대소문자 구분 없음. 이 걸 구분할 수 있는 입력을 받아야 한다. 변환할 수 있는 함수를 하나 만드는 것도 좋을 듯.
+    // 만약 자신이 터진 블록인가?
+        // Y -> 
+            // 자신이 1행에 위치할 때 까지 위로 올라가면서 나머지를 아래로 내려주기.
+    // 가 아닌, 위에서 아래로 터진 블록이 아닐 때 까지 내려야 하네요?
+    // 이게 훨씬 간단하게 될 듯.
 
-    // 2. 왠만하면 큐 로 구현하는게 좋아보임.
+    bool isEnd = false;
 
-    // 3. 데이터를 찾을 때, 만약 있는 데이터 인지 판별하기 위해서 큐를 순회해야 하고
-    //      있을 경우) 데이터를 뽑아서 push_back하면 될 듯
-    //      없을 경우) 새로 데이터 삽입. 이 경우 만약 데이터 크기가 초과한다면 pop_front하면 될 것.
+    while (!isEnd)
+    {
+        isEnd = true;
+        for (int i = 0; i < gm - 1; ++i)
+        {
+            for (int j = 0; j < gn; ++j)
+            {
+                // 위에 걸 먼저 체크 해주고, 만약 아래 있는 숫자가 0이 아닐 경우에 아래로 내려주어야 함.
+                // 아니야...이게 아니야....
+                // 아니면 반대로 체크하면 되지 않을까요?
+                // 마지막 - 1 행부터 체크해서 아래 있는 숫자가 0인가? 를 체크하면 되겠는데?
+                char l = board[i][j];
+                char r = board[i + 1][j];
+                if (l != '0' && (r == '0'))
+                {
+                    char temp = board[i][j];
+                    board[i][j] = '0';
+                    board[i + 1][j] = temp;
+                    isEnd = false;
+                }
+            }
+        }
+    }
+}
 
-    list<string> cityList;
-    int secCount = 0;
 
-    for (size_t i = 0; i < cities.size(); ++i)
-        secCount += isOverlap(cities[i], cityList, cacheSize);
 
-    return secCount;
+int solution(int m, int n, vector<string> board)
+{
+    gm = m;
+    gn = n;
+    vector<vector<int>> check(gm, vector<int>(gn, false));
+    int ret = 0;
+    int isEnd = 0;
+
+
+    while (true)
+    {
+        isEnd = 0;
+        isEnd += 블록터뜨리기(board, check);
+        if (isEnd == 0) // 더이상 터뜨릴 블록이 없을 경우
+            break;
+        ret += isEnd;
+        블록재정렬(board);
+    }
+
+    return ret;
 }
 
 int main()
 {
-
-    printf("%d\n", solution(3, vector<string>({ "Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA" })));
+    vector<string> a{ "CCBDE", "AAADE", "AAABF", "CCBBF" };
+    printf("%d\n", solution(4,5,a));
     return 0;
 }
