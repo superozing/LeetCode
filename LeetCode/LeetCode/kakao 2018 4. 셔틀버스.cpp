@@ -1,48 +1,97 @@
 #include "헤더.h"
 
-int ttoi(string _str)
+int ttom(string& _time)
 {
-    _str.erase(_str.begin() + 2);
-    return stoi(_str);
+	int min = (_time[0] - '0') * 10;
+	min += _time[1] - '0';
+
+	// 시간을 분으로 변환
+	min *= 60;
+
+	min += (_time[3] - '0') * 10;
+	min += _time[4] - '0';
+
+	return min;
 }
 
-string solution(int n, int t, int m, vector<string> timetable) 
+string mtot(int _time)
 {
-    // 구조 생각)
-    // 입력으로 들어오는 timetable의 string을 숫자로 바꾸어서 우선순위 큐에 넣어서 관리하면 좋을 것 같아.
-    // 에를 들어서 9:00 -> 900으로, 23:59 -> 2359으로 바꾸면 될 듯.
-    // 이제 가장 마지막에 차를 타야 하기 때문에.....큐에서 pop을 계속계속 하면 ...
-    
-    // 음... 이러면 사람이 한 곳에서 많이 탈 경우를 계산하지 못한다. 어떤 식으로 정렬될 값을 확인해야 할까?
+	string h = to_string(_time / 60);
+	string m = to_string(_time % 60);
+	string ret = "00:00";
+
+	if (h.length() == 1)
+		ret[1] = h[0];
+	else
+	{
+		ret[0] = h[0];
+		ret[1] = h[1];
+	}
+	if (m.length() == 1)
+		ret[4] = m[0];
+	else
+	{
+		ret[3] = m[0];
+		ret[4] = m[1];
+	}
+
+	return ret;
+}
+
+struct Bus
+{
+	int n;
+	int m;
+
+	Bus(int _n) : n(_n) {}
+	Bus() {}
+};
+
+string solution(int n, int t, int m, vector<string> timetable)
+{
+	vector<Bus> bus(t, Bus(n));
+	vector<int> time(timetable.size());
+
+	int startMin = 9 * 60;
+
+	for (int i = 0; i < t; ++i)
+	{
+		bus[i].m = startMin;
+		startMin += m;
+	}
+
+	for (int i = 0; i < timetable.size(); ++i)
+		time[i] = ttom(timetable[i]);
+
+	sort(time.begin(), time.end());
+
+	int busIdx = 0;
+	
+	for (int i = 0; i < time.size(); ++i)
+	{
+		if (bus[busIdx].m >= time[i])
+		{
+			--bus[busIdx].n;
+
+			if (bus[busIdx].n == 0)
+			{
+				++busIdx;
+			}
+		}
+		else
+		{
+			++busIdx;
+			--i;
+		}
+		if (busIdx == bus.size()) // 모든 버스를 순회했을 경우에는 어떻게 해야 할까?
+		{
+
+		}
+	}
+
+	// 이 경우, 모든 승객이 탄 후에도 버스의 자리가 남았다.
+	if (bus.back().n != 0)
+		return mtot(bus.back().m);
 
 
-    // 계산하기 전에, 일단 타임테이블의 모든 값을 컨테이너에 숫자로 변환해서 넣는 것은 해야 할 작업 같음.
-    // 아니면 시간 끼리의 우선순위를 비교하는 로직을 새로 짜도 되지만 비효율적인 느낌이 든다.
-
-    // 해당 시간에 타려는 사람이 몇 명 있는지를 알기 위해서 페어 구조체를 정의하는 것도 좋아보인다.
-    // 음.. 만약에 페어 구조체를 정의한다면-> 자료구조에 넣어 관리할 때 이미 해당 데이터가 있는지를 찾아야 하기 때문에...
-    // 가장 먼저 떠오르는 건 리스트이긴 해.
-
-    // 만약 중간에 리스트에 데이터를 채우는 과정에서 버스 배차 막차보다 늦은 경우가 있다면 더이상 타임테이블을 체크할 필요가 없어지게 된다.
-
-
-    /*멀티셋 을 사용한다면 중복된 데이터 개수를 Count를 사용해서 확인이 가능하다고 한다.
-      멀티셋을 사용해보는게 어떨까?*/
-
-
-    // 모든 타임테이블을 정수로 변환해서 데이터에 저장. 
-    // 만약 같은 데이터가 있을 경우, 해당 데이터의 count 1 증가. 
-    // 만약 마지막 열차 도착 시간보다 늦은 시간일 경우 무시. 하지만 이것 먼저 해보자.
-    for (int i = 0; i < timetable.size(); ++i)
-    {
-        ttoi(timetable[i]);
-    }
-
-
-
-
-    // 그리고 마지막에 정수 -> 시간으로 바꾸어주면 될 듯.
-    string answer = "";
-
-    return answer;
 }
