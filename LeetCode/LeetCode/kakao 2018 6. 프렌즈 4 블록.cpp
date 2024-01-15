@@ -3,7 +3,7 @@
 int gm = 0;
 int gn = 0;
 
-int 블록터뜨리기(vector<string>& board, vector<vector<int>>& check)
+int BoardCheck(vector<string>& board, vector<vector<int>>& check)
 {
     int ret = 0;
 
@@ -62,7 +62,7 @@ int solution(int m, int n, vector<string> board)
     
     while (true)
     {
-        int isEnd = 블록터뜨리기(board, check);
+        int isEnd = BoardCheck(board, check);
         if (isEnd == 0) 
             break;
         ret += isEnd;

@@ -3,7 +3,7 @@
 int gm = 0;
 int gn = 0;
 
-int 블록터뜨리기(vector<string>& board, vector<vector<int>>& check)
+int BoardCheck(vector<string>& board, vector<vector<int>>& check)
 {
     int ret = 0;
 
@@ -44,7 +44,7 @@ int 블록터뜨리기(vector<string>& board, vector<vector<int>>& check)
     return ret; // 터뜨린 블록 개수를 반환하면 될 듯?
 }
 
-void 블록재정렬(vector<string>& board)
+void BoardSort(vector<string>& board)
 {
     // 만약 자신이 터진 블록인가?
         // Y -> 
@@ -93,11 +93,11 @@ int solution(int m, int n, vector<string> board)
     while (true)
     {
         isEnd = 0;
-        isEnd += 블록터뜨리기(board, check);
+        isEnd += BoardCheck(board, check);
         if (isEnd == 0) // 더이상 터뜨릴 블록이 없을 경우
             break;
         ret += isEnd;
-        블록재정렬(board);
+        BoardSort(board);
     }
 
     return ret;
