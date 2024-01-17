@@ -22,13 +22,29 @@ public:
 void BAEKJOON_2805::init()
 {
 	string strbuf = "";
+	string strnum = "";
+	int index;
+
 	cin >> n;
+
 	for (int i = 0; i < n; ++i)
 	{
+		strbuf = "";
+		strnum = "";
+		index = 0;
 		cin >> strbuf;
-		vecT.push_back(stoi(strbuf));
-		cin >> strbuf;
-		vecP.push_back(stoi(strbuf));
+		while (strbuf[index] != ' ')
+		{
+			strnum += strbuf[index++];
+			vecT.push_back(stoi(strnum));
+		}
+		++index;
+		strnum = "";
+		for (; index < strbuf.length(); ++index)
+		{
+			strnum += strbuf[index];
+			vecP.push_back(stoi(strnum));
+		}
 	}
 }
 
@@ -41,7 +57,7 @@ void BAEKJOON_2805::progress()
 
 	int maxProfit = 0;
 	int curProfit = 0;
-
+	
 
 	// 1) n만큼 돌면 되는데, 남은 날짜보다 더 많은 날짜를 상담해야 할 경우, 해당 인덱스는 사용할 수가 없어요.
 	for (int i = 0; i < n; ++i)
@@ -64,11 +80,13 @@ void BAEKJOON_2805::progress()
 		i += vecT[i];
 	}
 
-	maxProfit = curProfit;
+
 
 	cout << curProfit;
-
 	return;
+
+
+
 }
 
 
