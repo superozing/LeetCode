@@ -26,10 +26,10 @@ void BAEKJOON_2805::init()
 	for (int i = 0; i < n; ++i)
 	{
 		cin >> buf;
-		P.push_back(buf);
+		T.push_back(buf);
 
 		cin >> buf;
-		T.push_back(buf);
+		P.push_back(buf);
 	}
 }
 
@@ -43,7 +43,7 @@ int BAEKJOON_2805::progress()
 	int t = T.back();
 	int p = P.back();
 
-	if (t > 0) // -> 이 경우 상담 진행 불가
+	if (t > 1) // -> 이 경우 상담 진행 불가
 		dp[n - 1] = 0;
 	else
 		dp[n - 1] = p;
@@ -62,7 +62,10 @@ int BAEKJOON_2805::progress()
 
 		// 1. 현재 날짜를 실행시키는게 더 많은 이득을 취하는지, 아니면 현재 날짜를 실행시키지 않는게 더 많은 이득을 취하는지를 계산해야 한다.
 		// 이 때, t만큼 앞으로 이동한 값과 자신의 값을 더한 것이 더 큰지와 i + 1의 값을 비교해서 집어넣는다.
-		dp[i] = dp[i + 1] > dp[i + t] + p ? (dp[i + 1]) : (dp[i + t] + p);
+		if (i + t > n - 1) // -> 이 경우, 자신과 이전까지의 합을 비교해준다
+			dp[i] = dp[i + 1] > p ? dp[i + 1] : p;
+		else
+			dp[i] = dp[i + 1] > dp[i + t] + p ? (dp[i + 1]) : (dp[i + t] + p);
 	}
 
 	return dp.front();
@@ -71,7 +74,6 @@ int BAEKJOON_2805::progress()
 int main()
 {
 	BAEKJOON_2805 b;
-
 	b.init();
 	cout << b.progress();
 	return 0;
