@@ -5,7 +5,7 @@
 using namespace std;
 
 
-class BAEKJOON_2805 // 퇴사
+class BAEKJOON_2805 // 나무 자르기
 {
 public:
 	int			m_treeLength;
