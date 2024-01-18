@@ -8,104 +8,71 @@ using namespace std;
 class BAEKJOON_2805 // 퇴사
 {
 public:
-	int			n;
-	vector<int> vecT;
-	vector<int> vecP;
+	int			n; // 퇴사까지 남은 날짜
+	vector<int> T; // 상담 진행 기간
+	vector<int> P; // 상담으로 얻는 이익
 
 public:
 	void init();
-	void progress();
+	int progress();
 };
 
 
 
 void BAEKJOON_2805::init()
 {
-	string strbuf = "";
-	string strnum = "";
-	int index;
-
 	cin >> n;
-
+	int buf = 0;
 	for (int i = 0; i < n; ++i)
 	{
-		strbuf = "";
-		strnum = "";
-		index = 0;
-		cin >> strbuf;
-		while (strbuf[index] != ' ')
-		{
-			strnum += strbuf[index++];
-			vecT.push_back(stoi(strnum));
-		}
-		++index;
-		strnum = "";
-		for (; index < strbuf.length(); ++index)
-		{
-			strnum += strbuf[index];
-			vecP.push_back(stoi(strnum));
-		}
+		cin >> buf;
+		P.push_back(buf);
+
+		cin >> buf;
+		T.push_back(buf);
 	}
 }
 
-void BAEKJOON_2805::progress()
+int BAEKJOON_2805::progress()
 {
-	n;	  // 최대날짜
-	vecT; // 쿨
-	vecP; // 이익
-	// 모든 경우를 탐색해야만 하나봐요.
+	// DP를 이용한 풀이가 필요하다...?
+	// 뒤 쪽 부터 이익을 계산하며 채워나가요.
+	vector<int> dp(n, -1);
 
-	int maxProfit = 0;
-	int curProfit = 0;
-	
+	// 마지막 날 먼저 계산
+	int t = T.back();
+	int p = P.back();
 
-	// 1) n만큼 돌면 되는데, 남은 날짜보다 더 많은 날짜를 상담해야 할 경우, 해당 인덱스는 사용할 수가 없어요.
-	for (int i = 0; i < n; ++i)
+	if (t > 0) // -> 이 경우 상담 진행 불가
+		dp[n - 1] = 0;
+	else
+		dp[n - 1] = p;
+
+	for (int i = n - 2; i >= 0; --i)
 	{
-		// 현재 남은 날짜보다 상담 기간이 크다면 해당 날짜에 상담을 진행할 수 없다.
-		// 이걸 미리 체크해두는 것도 좋을 듯.
-		if (vecT[i] > n - i)
+		t = T[i];
+		p = P[i];
+
+		// 0. 일단 이 날짜에 상담이 가능한지를 판단해야 한다.
+		if (i + t > n)
 		{
-			vecT[i] = 0;
-			vecP[i] = 0;
+			dp[i] = dp[i + 1];
+			continue;
 		}
+
+		// 1. 현재 날짜를 실행시키는게 더 많은 이득을 취하는지, 아니면 현재 날짜를 실행시키지 않는게 더 많은 이득을 취하는지를 계산해야 한다.
+		// 이 때, t만큼 앞으로 이동한 값과 자신의 값을 더한 것이 더 큰지와 i + 1의 값을 비교해서 집어넣는다.
+		dp[i] = dp[i + 1] > dp[i + t] + p ? (dp[i + 1]) : (dp[i + t] + p);
 	}
 
-
-	// 2) 모든 경우를 하나하나 전부 탐색하기 위해서는 어떻게 해야 할까?
-	// 이게 한 가지의 경우를 구하는 방법.
-	for (int i = 0; i < n; ++i)
-	{
-		curProfit += vecP[i];
-		i += vecT[i];
-	}
-
-
-
-	cout << curProfit;
-	return;
-
-
-
+	return dp.front();
 }
-
-
-
-
-
-
-
-
-
-
-
 
 int main()
 {
 	BAEKJOON_2805 b;
 
 	b.init();
-	b.progress();
+	cout << b.progress();
 	return 0;
-
 }

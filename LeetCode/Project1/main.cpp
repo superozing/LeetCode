@@ -8,110 +8,73 @@ using namespace std;
 class BAEKJOON_2805 // 퇴사
 {
 public:
-	int			m_treeLength;
-	int			m_MaxLength = 0;
-	vector<int> m_vecTree;
+	int			n; // 퇴사까지 남은 날짜
+	vector<int> T; // 상담 진행 기간
+	vector<int> P; // 상담으로 얻는 이익
 
 public:
 	void init();
-	void progress();
-
-	long long cutTree(long long _size);
+	int progress();
 };
 
 
 
 void BAEKJOON_2805::init()
 {
-	long long n = 0;
-	long long buf = 0;
-
 	cin >> n;
-	cin >> buf;
-
-	m_treeLength = buf;
-
-	for (long long i = 0; i < n; ++i)
+	int buf = 0;
+	for (int i = 0; i < n; ++i)
 	{
 		cin >> buf;
+		T.push_back(buf);
 
-		if (buf > m_MaxLength)
-			m_MaxLength = buf;
-
-		m_vecTree.push_back(buf);
+		cin >> buf;
+		P.push_back(buf);
 	}
 }
 
-long long BAEKJOON_2805::cutTree(long long _size)
+int BAEKJOON_2805::progress()
 {
-	long long treeLength = 0;
-	long long CutSize = 0;
+	// DP를 이용한 풀이가 필요하다...?
+	// 뒤 쪽 부터 이익을 계산하며 채워나가요.
+	vector<int> dp(n, -1);
 
-	for (auto& iter : m_vecTree)
+	// 마지막 날 먼저 계산
+	int t = T.back();
+	int p = P.back();
+
+	if (t > 1) // -> 이 경우 상담 진행 불가
+		dp[n - 1] = 0;
+	else
+		dp[n - 1] = p;
+
+	for (int i = n - 2; i >= 0; --i)
 	{
-		CutSize = iter - _size;
+		t = T[i];
+		p = P[i];
 
-		if (CutSize > 0)
-			treeLength += CutSize;
-	}
-
-	return treeLength;
-}
-
-void BAEKJOON_2805::progress()
-{
-	// 이거... 투포인터를 사용하면 되겠는걸?
-
-	// 제일 높은 나무의 길이를 인자를 입력 받을 때 체크하고
-	// min 길이를 0으로 설정해서
-	// 만약 가운데 높이로 절단한 나무의 총 길이가 m_treeLength보다 크면 가운데 높이를 제일 높은 길이로 설정.
-	// 아니면 제일 낮은 길이로 설정.
-	// 만약 같은 길이가 나오면 더이상 탐색할 필요가 없어진다..!!
-
-	long long low = 0;
-	long long high = m_MaxLength;
-
-	long long curHeight = 0;
-	long long cutTreeSize = 0;
-
-	while (true)
-	{
-		curHeight = (low + high) / 2;
-
-		cutTreeSize = cutTree(curHeight);
-
-		if (m_treeLength < cutTreeSize)
-			 low = curHeight;
-		else if (m_treeLength > cutTreeSize)
-			 high = curHeight;
-		else
+		// 0. 일단 이 날짜에 상담이 가능한지를 판단해야 한다.
+		if (i + t > n)
 		{
-			printf("%d", curHeight);
-			return;
+			dp[i] = dp[i + 1];
+			continue;
 		}
 
-		if (high - low < 10)
-			break;
+		// 1. 현재 날짜를 실행시키는게 더 많은 이득을 취하는지, 아니면 현재 날짜를 실행시키지 않는게 더 많은 이득을 취하는지를 계산해야 한다.
+		// 이 때, t만큼 앞으로 이동한 값과 자신의 값을 더한 것이 더 큰지와 i + 1의 값을 비교해서 집어넣는다.
+		if (i + t > n - 1) // -> 이 경우, 자신과 이전까지의 합을 비교해준다
+			dp[i] = dp[i + 1] > p ? dp[i + 1] : p;
+		else
+			dp[i] = dp[i + 1] > dp[i + t] + p ? (dp[i + 1]) : (dp[i + t] + p);
 	}
 
-	for (; low != high;  --high)
-	{
-		if (m_treeLength <= cutTree(high))
-			break;
-	}
-
-	printf("%d", high);
-	return;
+	return dp.front();
 }
-
 
 int main()
 {
 	BAEKJOON_2805 b;
-
 	b.init();
-	b.progress();
+	cout << b.progress();
 	return 0;
-
 }
-
