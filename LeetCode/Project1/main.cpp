@@ -8,78 +8,101 @@ using namespace std;
 class BAEKJOON_2805 // 퇴사
 {
 public:
-	int			n;
-	vector<int> vecT;
-	vector<int> vecP;
+	int			m_treeLength;
+	int			m_MaxLength = 0;
+	vector<int> m_vecTree;
 
 public:
 	void init();
 	void progress();
+
+	long long cutTree(long long _size);
 };
 
 
 
 void BAEKJOON_2805::init()
 {
-	string strbuf = "";
+	long long n = 0;
+	long long buf = 0;
+
 	cin >> n;
-	for (int i = 0; i < n; ++i)
+	cin >> buf;
+
+	m_treeLength = buf;
+
+	for (long long i = 0; i < n; ++i)
 	{
-		cin >> strbuf;
-		vecT.push_back(stoi(strbuf));
-		cin >> strbuf;
-		vecP.push_back(stoi(strbuf));
+		cin >> buf;
+
+		if (buf > m_MaxLength)
+			m_MaxLength = buf;
+
+		m_vecTree.push_back(buf);
 	}
+}
+
+long long BAEKJOON_2805::cutTree(long long _size)
+{
+	long long treeLength = 0;
+	long long CutSize = 0;
+
+	for (auto& iter : m_vecTree)
+	{
+		CutSize = iter - _size;
+
+		if (CutSize > 0)
+			treeLength += CutSize;
+	}
+
+	return treeLength;
 }
 
 void BAEKJOON_2805::progress()
 {
-	n;	  // 최대날짜
-	vecT; // 쿨
-	vecP; // 이익
-	// 모든 경우를 탐색해야만 하나봐요.
+	// 이거... 투포인터를 사용하면 되겠는걸?
 
-	int maxProfit = 0;
-	int curProfit = 0;
+	// 제일 높은 나무의 길이를 인자를 입력 받을 때 체크하고
+	// min 길이를 0으로 설정해서
+	// 만약 가운데 높이로 절단한 나무의 총 길이가 m_treeLength보다 크면 가운데 높이를 제일 높은 길이로 설정.
+	// 아니면 제일 낮은 길이로 설정.
+	// 만약 같은 길이가 나오면 더이상 탐색할 필요가 없어진다..!!
 
+	long long low = 0;
+	long long high = m_MaxLength;
 
-	// 1) n만큼 돌면 되는데, 남은 날짜보다 더 많은 날짜를 상담해야 할 경우, 해당 인덱스는 사용할 수가 없어요.
-	for (int i = 0; i < n; ++i)
+	long long curHeight = 0;
+	long long cutTreeSize = 0;
+
+	while (true)
 	{
-		// 현재 남은 날짜보다 상담 기간이 크다면 해당 날짜에 상담을 진행할 수 없다.
-		// 이걸 미리 체크해두는 것도 좋을 듯.
-		if (vecT[i] > n - i)
+		curHeight = (low + high) / 2;
+
+		cutTreeSize = cutTree(curHeight);
+
+		if (m_treeLength < cutTreeSize)
+			 low = curHeight;
+		else if (m_treeLength > cutTreeSize)
+			 high = curHeight;
+		else
 		{
-			vecT[i] = 0;
-			vecP[i] = 0;
+			printf("%d", curHeight);
+			return;
 		}
+
+		if (high - low < 10)
+			break;
 	}
 
-
-	// 2) 모든 경우를 하나하나 전부 탐색하기 위해서는 어떻게 해야 할까?
-	// 이게 한 가지의 경우를 구하는 방법.
-	for (int i = 0; i < n; ++i)
+	for (; low != high;  --high)
 	{
-		curProfit += vecP[i];
-		i += vecT[i];
+		if (m_treeLength <= cutTree(high))
+			break;
 	}
 
-	maxProfit = curProfit;
-
-	cout << curProfit;
-
+	printf("%d", high);
 	return;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 int main()
@@ -91,3 +114,4 @@ int main()
 	return 0;
 
 }
+
