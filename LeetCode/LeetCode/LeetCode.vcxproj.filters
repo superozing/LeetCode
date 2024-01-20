@@ -138,6 +138,9 @@
     <ClCompile Include="b. 2805.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="b. 14890.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
