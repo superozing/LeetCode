@@ -175,6 +175,7 @@
     <ClCompile Include="973. K Closest Points to Origin.cpp" />
     <ClCompile Include="b. 14501.cpp" />
     <ClCompile Include="b. 14890.cpp" />
+    <ClCompile Include="b. 1747.cpp" />
     <ClCompile Include="b. 2805.cpp" />
     <ClCompile Include="kakao 2018 1. 비밀지도.cpp" />
     <ClCompile Include="kakao 2018 2. 다트 게임.cpp" />
