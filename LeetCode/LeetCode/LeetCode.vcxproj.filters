@@ -144,6 +144,9 @@
     <ClCompile Include="b. 1747.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="b. 1697.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">
