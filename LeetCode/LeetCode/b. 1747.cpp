@@ -1,72 +1,84 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <list>
 #include <algorithm>
 #include <cmath>
 
 using namespace std;
 
-
-class BAEKJOON // 퇴사
+class BAEKJOON // 숨바꼭질
 {
 public:
-	long long n;
+    int n; // 수빈이의 위치
+    int k; // 동생의 위치
+    const int MAX = 100001;
+    string road;
 
 public:
-	BAEKJOON() { init(); }
-	void init();
-	long long progress();
+    BAEKJOON() { init(); }
+    void init();
+    int progress();
 
-	bool isPalindrome(string n);
-	bool isPrime(long long n);
+    int search();
 };
-
 
 void BAEKJOON::init()
 {
-	cin >> n;
+    cin >> n;
+    cin >> k;
+
+    road.resize(MAX, 'x');
 }
 
-long long BAEKJOON::progress()
-{
-	while (true)
-	{
-		if (isPalindrome(to_string(n)) && isPrime(n))
-			break;
-		else
-			++n;
-	}
+typedef pair<int, int> ii;
 
-	return n;
+int BAEKJOON::search()
+{
+    list<ii> q;
+
+    q.push_back({ n, 0 });
+    road[n] = 'o';
+
+    while (!q.empty())
+    {
+        ii b = q.front(); q.pop_front();
+        int N = b.first;
+        int move = b.second;
+
+        if (N == k) // 일치하는 경우
+            return move;
+        else
+        {
+            if (N + 1 < MAX && road[N + 1] == 'x') // +1 움직일 경우
+            {
+                road[N + 1] = 'o';
+                q.push_back({ N + 1, move + 1 });
+            }
+            if (N * 2 < MAX && road[N * 2] == 'x') // *2 움직일 경우
+            {
+                road[N * 2] = 'o';
+                q.push_back({ N * 2, move + 1 });
+            }
+            if (N > 0 && road[N - 1] == 'x') // -1 움직일 경우
+            {
+                road[N - 1] = 'o';
+                q.push_back({ N - 1, move + 1 });
+            }
+        }
+    }
+
+    return -1;
 }
 
-bool BAEKJOON::isPalindrome(string n)
+int BAEKJOON::progress()
 {
-	int len = n.length();
-
-	for (int i = 0; i < len / 2; ++i)
-		if (n[i] != n[len - i - 1])
-			return false;
-
-	return true;
-}
-
-bool BAEKJOON::isPrime(long long n)
-{
-	if (n == 1)
-		return false;
-	// 판정할 부분: 2~sqrt(n)
-	for (long long i = 2; i <= sqrt(n); ++i)
-	{
-		if (n % i == 0)
-			return false;
-	}
-
-	return true;
+    return search();
 }
 
 int main()
 {
-	BAEKJOON b;
-	cout << b.progress();
-	return 0;
+    BAEKJOON b;
+    cout << b.progress();
+    return 0;
 }

@@ -7,135 +7,78 @@
 
 using namespace std;
 
-class BAEKJOON // 영역 구하기
+class BAEKJOON // 숨바꼭질
 {
 public:
-    int x;
-    int y;
-    int k;
-
-    vector<string> p;
-    vector<int> width;
+    int n; // 수빈이의 위치
+    int k; // 동생의 위치
+    const int MAX = 100001;
+    string road;
 
 public:
     BAEKJOON() { init(); }
     void init();
-    void progress();
-    void print();
+    int progress();
 
-    int search(int x, int y);
+    int search();
 };
 
-/*
-5 7 3
-0 2 4 4
-1 1 2 5
-4 0 6 2
-*/
 void BAEKJOON::init()
 {
-    cin >> y;
-    cin >> x;
-
-    string s;
-
-    for (int i = 0; i < x; ++i)
-        s += 'x';
-
-    for (int i = 0; i < y; ++i)
-        p.push_back(s);
-
+    cin >> n;
     cin >> k;
 
-    int left = 0;
-    int top = 0;
-    int right = 0;
-    int bottom = 0;
-
-    for (int i = 0; i < k; ++i)
-    {
-        cin >> left;
-        cin >> top;
-        cin >> right;
-        cin >> bottom;
-
-        for (int j = left; j < right; ++j)
-            for (int k = top; k < bottom; ++k)
-                p[k][j] = 'o';
-
-    }
+    road.resize(MAX, 'x');
 }
 
 typedef pair<int, int> ii;
 
-int BAEKJOON::search(int Y, int X)
+int BAEKJOON::search()
 {
-    list<ii> queue;
-    int count = 0;
-    queue.push_back({ Y, X });
-    p[Y][X] = 'o';
+    list<ii> q;
 
-    while (!queue.empty())
+    q.push_back({ n, 0 });
+    road[n] = 'o';
+
+    while (!q.empty())
     {
-        ii b = queue.front();
-        queue.pop_front();
-        ++count;
+        ii b = q.front(); q.pop_front();
+        int N = b.first;
+        int move = b.second;
 
-        int cY = b.first;
-        int cX = b.second;
-        if (cX != 0 && p[cY][cX - 1] == 'x') // 왼 쪽
+        if (N == k) // 일치하는 경우
+            return move;
+        else
         {
-            p[cY][cX - 1] = 'o';
-            queue.push_back({ cY, cX - 1 });
-        }
-        if (cX + 1 < x && p[cY][cX + 1] == 'x') // 오른 쪽
-        {
-            p[cY][cX + 1] = 'o';
-            queue.push_back({ cY, cX + 1 });
-        }
-        if (cY != 0 && p[cY - 1][cX] == 'x') // 위 쪽
-        {
-            p[cY - 1][cX] = 'o';
-            queue.push_back({ cY - 1, cX });
-        }
-        if (cY + 1 < y && p[cY + 1][cX] == 'x') // 아래 쪽
-        {
-            p[cY + 1][cX] = 'o';
-            queue.push_back({ cY + 1, cX });
+            if (N + 1 < MAX && road[N + 1] == 'x') // +1 움직일 경우
+            {
+                road[N + 1] = 'o';
+                q.push_back({ N + 1, move + 1 });
+            }
+            if (N * 2 < MAX && road[N * 2] == 'x') // *2 움직일 경우
+            {
+                road[N * 2] = 'o';
+                q.push_back({ N * 2, move + 1 });
+            }
+            if (N > 0 && road[N - 1] == 'x') // -1 움직일 경우
+            {
+                road[N - 1] = 'o';
+                q.push_back({ N - 1, move + 1 });
+            }
         }
     }
 
-    return count;
+    return -1;
 }
 
-void BAEKJOON::progress()
+int BAEKJOON::progress()
 {
-    for (int i = 0; i < y; ++i)
-    {
-        for (int j = 0; j < x; ++j)
-        {
-            if (p[i][j] == 'x')
-                width.push_back(search(i, j));
-        }
-    }
-}
-
-void BAEKJOON::print()
-{
-    cout << width.size() << endl;
-
-    sort(width.begin(), width.end());
-
-    for (auto& it : width)
-        cout << it << ' ';
-
-    cout << endl;
+    return search();
 }
 
 int main()
 {
     BAEKJOON b;
-    b.progress();
-    b.print();
+    cout << b.progress();
     return 0;
 }
