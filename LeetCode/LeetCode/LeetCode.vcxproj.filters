@@ -150,6 +150,9 @@
     <ClCompile Include="b. 2583.cpp">
       <Filter>Problem List</Filter>
     </ClCompile>
+    <ClCompile Include="b. 1946.cpp">
+      <Filter>Problem List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="헤더.h">

@@ -62,7 +62,7 @@ void BAEKJOON::init()
     for (auto& it : ret)
         cout << it << endl;
 }
-    
+
 
 
 
