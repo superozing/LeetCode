@@ -50,7 +50,7 @@ int BAEKJOON::search(int Y, int X)
 
     list<iii> stack;
     int count = 0;
-    stack.push_back({{ Y, X }, 0});
+    stack.push_back({ { Y, X }, 0 });
 
     while (!stack.empty())
     {
@@ -64,25 +64,25 @@ int BAEKJOON::search(int Y, int X)
         {
             visit[p[cY][cX - 1]] = true;
             MoveFlag = true;
-            stack.push_back({{ cY, cX - 1 }, b.second + 1});
+            stack.push_back({ { cY, cX - 1 }, b.second + 1 });
         }
         if (cX + 1 < x && visit[p[cY][cX + 1]] == false) // 오른 쪽
         {
             visit[p[cY][cX + 1]] = true;
             MoveFlag = true;
-            stack.push_back({{ cY, cX + 1 }, b.second + 1});
+            stack.push_back({ { cY, cX + 1 }, b.second + 1 });
         }
         if (cY != 0 && visit[p[cY - 1][cX]] == false) // 위 쪽
         {
             visit[p[cY - 1][cX]] = true;
             MoveFlag = true;
-            stack.push_back({{ cY - 1, cX }, b.second + 1});
+            stack.push_back({ { cY - 1, cX }, b.second + 1 });
         }
         if (cY + 1 < y && visit[p[cY + 1][cX]] == false) // 아래 쪽
         {
             visit[p[cY + 1][cX]] = true;
             MoveFlag = true;
-            stack.push_back({{ cY + 1, cX }, b.second + 1});
+            stack.push_back({ { cY + 1, cX }, b.second + 1 });
         }
 
         if (!MoveFlag)
