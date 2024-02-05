@@ -27,7 +27,7 @@ void BAEKJOON::progress()
         cin >> buf;
         if (buf != 0)
         {
-             pq.push(buf);
+            pq.push(buf);
         }
         else
         {
