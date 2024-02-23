@@ -6,92 +6,52 @@ using namespace std;
 class BAEKJOON // 삼각수의 합
 {
 public:
-    int N; // 신호등 count
-    int K; // 연속으로 존재해야 하는 신호등의 개수
-    int B; // 고장난 신호등의 개수
-    vector<bool> road;
+    int N; // 노래 개수
+    int L; // 노래 하나 당 길이
+    int D; // 전화벨이 울리는 간격
+    vector<bool> vec;
 
 public:
-    BAEKJOON() { init(); }
+    BAEKJOON() { cout << progress(); }
     void init();
-    void progress();
-
-private:
-
-    int search(int l, int r);
+    int progress();
 
 };
-int BAEKJOON::search(int l, int r)
-{
-    static int sinhoCount = -1;
-
-    if (-1 == sinhoCount) // 첫 실행시
-    {
-        sinhoCount = 0;
-        for (int i = l; i <= r; ++i)
-        {
-            if (road[i])
-                ++sinhoCount;
-        }
-    }
-    else // 이후 실행시
-    {
-        if (road[l - 1] == true)
-            --sinhoCount;
-        if (road[r] == true)
-            ++sinhoCount;
-    }
-
-    return sinhoCount;
-}
 
 void BAEKJOON::init()
 {
     cin >> N;
-    road.resize(N + 1);
-    cin >> K;
-    cin >> B;
-
-    int buf = 0;
-
-    for (int i = 0; i < B; ++i)
-    {
-        cin >> buf;
-        road[buf] = true;
-    }
+    cin >> L;
+    cin >> D;
 }
 
-void BAEKJOON::progress()
+int BAEKJOON::progress()
 {
-    // 슬라이딩 윈도우 문제.
-    // 윈도우 크기: K
+    init();
 
-    // 최소 몇 개의 신호등을 수리해야 하는가? -> bool 값 중 true의 개수.
-    // left ~ right 까지의 bool 값을 계속해서 훑을 때, 가장 작은 값을 출력해야 한다.
-    // 근데 이렇게 풀면 왠지 타임 아웃이 날 것 같은 느낌이 드는데요...???
-    // 데이터를 중복해서 검사하면 안될 느낌이 살짝 든다.
-    // 일단 중복해서 검사하는 것을 허용해서 해볼까요? -> 역시나 시간 초과가 난다.
-
-    int left = 1;
-    int right = K;
-
-    int returnVal = K;
-
-    while (right != N + 1)
+    for (int i = 0; i < N; ++i)
     {
-        returnVal = min(search(left, right), returnVal);
-        //cout << returnVal << endl << endl;
-        ++left;
-        ++right;
+        for (int j = 0; j < L; ++j)
+            vec.push_back(true);
+        for (int j = 0; j < 5; ++j)
+            vec.push_back(false);
     }
 
-    cout << returnVal;
+    // 중간에 쉬는 시간: 5초
+    int i = 1;
+    for (; i * D < vec.size(); ++i)
+    {
+        if (vec[i * D] == false)
+            return i * D;
+    }
+
+    return i * D;
+
 }
 
 int main()
 {
     BAEKJOON b;
-    b.progress();
 
     return 0;
 }
