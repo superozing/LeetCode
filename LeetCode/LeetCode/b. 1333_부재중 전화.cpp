@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class BAEKJOON // 삼각수의 합
+class BAEKJOON // 부재중 전화
 {
 public:
     int N; // 노래 개수
